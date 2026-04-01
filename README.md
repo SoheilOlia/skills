@@ -1,6 +1,6 @@
 # Skills
 
-A collection of installable agent skills for [Amp](https://ampcode.com).
+A collection of installable agent skills for Amp, Claude Code, and Claude.
 
 ## Available Skills
 
