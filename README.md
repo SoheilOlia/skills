@@ -5,7 +5,8 @@ Installable agent skills.
 ## Install
 
 ```bash
-amp skill install github.com/SoheilOlia/skills/block2.0/jack-officehour
+git clone --depth 1 https://github.com/SoheilOlia/skills.git /tmp/soheil-skills
+amp skill add /tmp/soheil-skills/block2.0/jack-officehour --global
 ```
 
 ## Available Skills
