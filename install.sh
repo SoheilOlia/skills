@@ -3,11 +3,12 @@
 # Usage:
 #   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil_ocean
 #   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s soho
+#   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s claude-check
 
 set -euo pipefail
 
-SKILL_PATH="${1:?Usage: install.sh <skill-path> (for example: boil_ocean or soho)}"
-REPO_URL="https://github.com/SoheilOlia/skills.git"
+SKILL_PATH="${1:?Usage: install.sh <skill-path> (for example: boil_ocean, claude-check, or soho)}"
+REPO_URL="${REPO_URL:-https://github.com/SoheilOlia/skills.git}"
 TMP_DIR="$(mktemp -d)"
 
 cleanup() {
@@ -26,12 +27,14 @@ fallback_install() {
   local agents_dir="${HOME}/.agents/skills"
   local claude_dir="${HOME}/.claude/skills"
   local codex_dir="${HOME}/.codex/skills"
+  local cursor_dir="${HOME}/.cursor/skills"
 
-  mkdir -p "$agents_dir" "$claude_dir" "$codex_dir"
+  mkdir -p "$agents_dir" "$claude_dir" "$codex_dir" "$cursor_dir"
   rm -rf "${agents_dir}/${name}"
   cp -R "$skill_dir" "${agents_dir}/${name}"
   ln -sfn "${agents_dir}/${name}" "${claude_dir}/${name}"
   ln -sfn "${agents_dir}/${name}" "${codex_dir}/${name}"
+  ln -sfn "${agents_dir}/${name}" "${cursor_dir}/${name}"
 }
 
 link_skill_aliases() {
@@ -40,21 +43,47 @@ link_skill_aliases() {
   local agents_dir="${HOME}/.agents/skills"
   local claude_dir="${HOME}/.claude/skills"
   local codex_dir="${HOME}/.codex/skills"
+  local cursor_dir="${HOME}/.cursor/skills"
 
   if [[ "$installed_name" == "$canonical_name" ]]; then
     return
   fi
 
   if [[ -e "${agents_dir}/${installed_name}" ]]; then
-    mkdir -p "$claude_dir" "$codex_dir"
+    mkdir -p "$claude_dir" "$codex_dir" "$cursor_dir"
     ln -sfn "${agents_dir}/${installed_name}" "${agents_dir}/${canonical_name}"
     ln -sfn "${agents_dir}/${installed_name}" "${claude_dir}/${canonical_name}"
     ln -sfn "${agents_dir}/${installed_name}" "${codex_dir}/${canonical_name}"
+    ln -sfn "${agents_dir}/${installed_name}" "${cursor_dir}/${canonical_name}"
   elif [[ -e "${agents_dir}/${canonical_name}" ]]; then
-    mkdir -p "$claude_dir" "$codex_dir"
+    mkdir -p "$claude_dir" "$codex_dir" "$cursor_dir"
     ln -sfn "${agents_dir}/${canonical_name}" "${agents_dir}/${installed_name}"
     ln -sfn "${agents_dir}/${canonical_name}" "${claude_dir}/${installed_name}"
     ln -sfn "${agents_dir}/${canonical_name}" "${codex_dir}/${installed_name}"
+    ln -sfn "${agents_dir}/${canonical_name}" "${cursor_dir}/${installed_name}"
+  fi
+}
+
+install_command_shims() {
+  local skill_dir="$1"
+  local name="$2"
+  local claude_commands_dir="${HOME}/.claude/commands"
+  local cursor_commands_dir="${HOME}/.cursor/commands"
+
+  if [[ -d "${skill_dir}/claude-code" ]]; then
+    mkdir -p "$claude_commands_dir"
+    for command_file in "${skill_dir}"/claude-code/*.md; do
+      [[ -f "$command_file" ]] || continue
+      cp "$command_file" "${claude_commands_dir}/$(basename "$command_file")"
+    done
+  fi
+
+  if [[ -d "${skill_dir}/cursor" ]]; then
+    mkdir -p "$cursor_commands_dir"
+    for command_file in "${skill_dir}"/cursor/*.md; do
+      [[ -f "$command_file" ]] || continue
+      cp "$command_file" "${cursor_commands_dir}/$(basename "$command_file")"
+    done
   fi
 }
 
@@ -70,7 +99,7 @@ install_one() {
     exit 1
   fi
 
-  if command -v sq >/dev/null 2>&1 && sq agents skills --help >/dev/null 2>&1; then
+  if [[ "${SKILLS_INSTALL_USE_SQ:-1}" == "1" ]] && command -v sq >/dev/null 2>&1 && sq agents skills --help >/dev/null 2>&1; then
     sq agents skills add "$skill_dir"
   else
     fallback_install "$skill_dir" "$name"
@@ -78,8 +107,9 @@ install_one() {
   fi
 
   link_skill_aliases "$folder_name" "$name"
+  install_command_shims "$skill_dir" "$name"
 
-  if command -v amp >/dev/null 2>&1; then
+  if [[ "${SKILLS_INSTALL_USE_AMP:-1}" == "1" ]] && command -v amp >/dev/null 2>&1; then
     amp skill add "$skill_dir" --global >/dev/null 2>&1 || true
   fi
 }
