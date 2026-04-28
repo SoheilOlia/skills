@@ -6,6 +6,10 @@ Use it when the work should ship as a finished product, not a plan: search befor
 building, define done, implement the real fix, test it, document receipts, and make
 only claims that are backed by verified evidence.
 
+Invoking it is an execution signal: agents should proceed end-to-end without waiting
+for a separate Apples approval unless the request says read-only, review-only, no
+edits, no commit, or no push.
+
 ## Install
 
 ```bash

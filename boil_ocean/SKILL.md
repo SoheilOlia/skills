@@ -1,6 +1,6 @@
 ---
 name: boil-ocean
-description: Use when implementing, fixing, refactoring, building, wiring, documenting, or shipping code or workflow changes where the user expects a finished result with tests, docs, receipts, and no avoidable loose ends. Also use when the user says "do the whole thing", "ship complete", "no workaround", "show receipts", "boil the ocean", or similar.
+description: Use when implementing, fixing, refactoring, building, wiring, documenting, or shipping code or workflow changes where the user expects a finished result with tests, docs, receipts, and no avoidable loose ends. Also use when the user invokes "boil-ocean", "boil the ocean", "superpowers", "Soheil, just do it", "ship complete", "no workaround", "show receipts", or any execution-mode request that should override listen-only/Apples mode.
 ---
 
 # Boil Ocean
@@ -10,6 +10,16 @@ description: Use when implementing, fixing, refactoring, building, wiring, docum
 Use this skill to turn an implementation request into a finished, verified deliverable. The standard is not "make progress"; it is "deliver the real thing that can be trusted."
 
 Completeness does not mean uncontrolled scope expansion. It means closing the user's requested value chain wherever the real fix is reachable.
+
+## Execution Mandate
+
+Invoking this skill is an explicit execution signal. Do not wait for a separate "Apples" approval before acting.
+
+Proceed end-to-end by default: inspect, edit, test, document, commit, push, and open a PR when those steps are the natural path to a finished result and are allowed by the repo's rules.
+
+Step down from execution mode only when the user says `read-only`, `review-only`, `dry-run`, `plan-only`, `listen-only`, `no edits`, `no commit`, or `no push`. Treat those phrases as hard constraints.
+
+Still confirm before destructive or externally visible actions outside the requested value chain: force-push, push directly to protected `main`, delete branches, delete unrelated files, rewrite user-owned work, merge PRs, or send Slack/Linear/email messages.
 
 ## Operating Contract
 
@@ -30,6 +40,7 @@ Before claiming done, the work must satisfy these conditions:
 
 - Read project instructions first.
 - Check current git state before editing.
+- Create or switch to a task branch when the work should be committed or reviewed separately.
 - Search with `rg` or `rg --files` for existing patterns, call sites, tests, docs, and receipts.
 - Identify whether named examples are fixtures, golden tests, or the whole system.
 - Protect unrelated dirty changes.
@@ -58,7 +69,8 @@ If the request is broad, choose the highest-impact slice that produces durable p
 ### 4. Prove It
 
 - Add or update tests before or alongside implementation.
-- Run targeted tests first, then the broadest practical suite.
+- Run targeted tests first, then at least one end-to-end or canonical-path check when the change affects a workflow.
+- Run the broadest practical suite before claiming merge readiness.
 - Run format, lint, type, or smoke checks when available or relevant.
 - Inspect generated artifacts that the user will rely on.
 - If a full suite cannot run, say exactly why and what did run.
@@ -76,6 +88,8 @@ A good receipt includes:
 - blockers and risks
 - what is explicitly not claimed
 - next recommended action
+
+For ticketed or project-status work, also update or draft the corresponding Linear comment, receipt path, or project note so the work is not orphaned in chat. If the change corrects a reusable failure mode, update the relevant lessons or agent instructions.
 
 ### 6. Finish Cleanly
 
@@ -108,6 +122,13 @@ Do not:
 - broaden into unrelated work just to look complete
 - delete, overwrite, or revert dirty user changes to make the tree look clean
 
+## Composes With
+
+- Use `brainstorming` or `writing-plans` only when the requested outcome is ambiguous enough that a short design pass prevents waste.
+- Use `test-driven-development` for behavior changes where the failing case can be captured before implementation.
+- Use `verification-before-completion` before claiming the branch is done, especially when commits, PRs, generated artifacts, or external systems are involved.
+- Use `claude-check` or another independent review pass when the result changes a gate, pipeline, receipt, or project truth claim.
+
 ## Escalation Rule
 
-Ask the user only when the next decision cannot be inferred, discovered, or safely scoped. Otherwise, make the conservative engineering call and continue.
+Ask the user only when the next decision cannot be inferred, discovered, or safely scoped, or when the action falls into the confirmation-required list in Execution Mandate. Otherwise, make the conservative engineering call and continue.

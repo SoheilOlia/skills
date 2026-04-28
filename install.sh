@@ -44,24 +44,30 @@ link_skill_aliases() {
   local claude_dir="${HOME}/.claude/skills"
   local codex_dir="${HOME}/.codex/skills"
   local cursor_dir="${HOME}/.cursor/skills"
+  local source_name
+  local alias_name
 
   if [[ "$installed_name" == "$canonical_name" ]]; then
     return
   fi
 
-  if [[ -e "${agents_dir}/${installed_name}" ]]; then
+  if [[ -e "${agents_dir}/${canonical_name}" ]]; then
     mkdir -p "$claude_dir" "$codex_dir" "$cursor_dir"
-    ln -sfn "${agents_dir}/${installed_name}" "${agents_dir}/${canonical_name}"
-    ln -sfn "${agents_dir}/${installed_name}" "${claude_dir}/${canonical_name}"
-    ln -sfn "${agents_dir}/${installed_name}" "${codex_dir}/${canonical_name}"
-    ln -sfn "${agents_dir}/${installed_name}" "${cursor_dir}/${canonical_name}"
-  elif [[ -e "${agents_dir}/${canonical_name}" ]]; then
+    source_name="$canonical_name"
+    alias_name="$installed_name"
+  elif [[ -e "${agents_dir}/${installed_name}" ]]; then
     mkdir -p "$claude_dir" "$codex_dir" "$cursor_dir"
-    ln -sfn "${agents_dir}/${canonical_name}" "${agents_dir}/${installed_name}"
-    ln -sfn "${agents_dir}/${canonical_name}" "${claude_dir}/${installed_name}"
-    ln -sfn "${agents_dir}/${canonical_name}" "${codex_dir}/${installed_name}"
-    ln -sfn "${agents_dir}/${canonical_name}" "${cursor_dir}/${installed_name}"
+    source_name="$installed_name"
+    alias_name="$canonical_name"
+  else
+    return
   fi
+
+  rm -rf "${agents_dir:?}/${alias_name}" "${claude_dir:?}/${alias_name}" "${codex_dir:?}/${alias_name}" "${cursor_dir:?}/${alias_name}"
+  ln -sfn "${agents_dir}/${source_name}" "${agents_dir}/${alias_name}"
+  ln -sfn "${agents_dir}/${source_name}" "${claude_dir}/${alias_name}"
+  ln -sfn "${agents_dir}/${source_name}" "${codex_dir}/${alias_name}"
+  ln -sfn "${agents_dir}/${source_name}" "${cursor_dir}/${alias_name}"
 }
 
 install_command_shims() {
