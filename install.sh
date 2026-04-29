@@ -63,7 +63,12 @@ link_skill_aliases() {
     return
   fi
 
-  rm -rf "${agents_dir:?}/${alias_name}" "${claude_dir:?}/${alias_name}" "${codex_dir:?}/${alias_name}" "${cursor_dir:?}/${alias_name}"
+  for alias_path in "${agents_dir}/${alias_name}" "${claude_dir}/${alias_name}" "${codex_dir}/${alias_name}" "${cursor_dir}/${alias_name}"; do
+    if [[ -e "$alias_path" || -L "$alias_path" ]]; then
+      echo "Replacing skill alias ${alias_path} -> ${agents_dir}/${source_name}"
+      rm -rf "$alias_path"
+    fi
+  done
   ln -sfn "${agents_dir}/${source_name}" "${agents_dir}/${alias_name}"
   ln -sfn "${agents_dir}/${source_name}" "${claude_dir}/${alias_name}"
   ln -sfn "${agents_dir}/${source_name}" "${codex_dir}/${alias_name}"

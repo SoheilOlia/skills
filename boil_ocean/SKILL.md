@@ -19,7 +19,7 @@ Proceed end-to-end by default: inspect, edit, test, document, commit, push, and 
 
 Step down from execution mode only when the user says `read-only`, `review-only`, `dry-run`, `plan-only`, `listen-only`, `no edits`, `no commit`, or `no push`. Treat those phrases as hard constraints.
 
-Still confirm before destructive or externally visible actions outside the requested value chain: force-push, push directly to protected `main`, delete branches, delete unrelated files, rewrite user-owned work, merge PRs, or send Slack/Linear/email messages.
+Still confirm before destructive, high-blast-radius, or externally visible actions: force-push, push directly to protected `main`, merge PRs, delete branches, delete files or directories beyond a narrow task-scoped change, rewrite user-owned work, skip hooks with `--no-verify`, run `git reset --hard` or `git clean -fd`, rebase published history, run `rm -rf` outside the repo working tree, mutate production data or databases, kill processes you did not start, or send Slack/Linear/email messages.
 
 ## Operating Contract
 
