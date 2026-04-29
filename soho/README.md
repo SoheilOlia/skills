@@ -11,6 +11,14 @@ curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | b
 ```
 
 This installs every skill under `soho/skills/` into the global skill directory.
+The `using-soho` skill also includes Cursor command shims for `/soho`,
+`/soho-plan`, and `/soho-swarm` where the host scans `~/.cursor/commands`.
+For Cursor projects that require project-local commands, install the source
+plugin's commands into that project with:
+
+```bash
+~/agent-plugins/soho/scripts/install-cursor-project.sh /path/to/project
+```
 
 ## Included skills
 
