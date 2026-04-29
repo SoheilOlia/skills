@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 # Install a skill or skill bundle from SoheilOlia/skills.
 # Usage:
-#   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil_ocean
+#   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil-ocean
 #   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s soho
 #   curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s claude-check
 
 set -euo pipefail
 
-SKILL_PATH="${1:?Usage: install.sh <skill-path> (for example: boil_ocean, claude-check, or soho)}"
+SKILL_PATH="${1:?Usage: install.sh <skill-path> (for example: boil-ocean, claude-check, or soho)}"
+
+# Back-compat: legacy underscore name redirects to the canonical hyphenated form.
+if [[ "$SKILL_PATH" == "boil_ocean" ]]; then
+  echo "Note: 'boil_ocean' has been renamed to 'boil-ocean'. Redirecting."
+  SKILL_PATH="boil-ocean"
+fi
 REPO_URL="${REPO_URL:-https://github.com/SoheilOlia/skills.git}"
 TMP_DIR="$(mktemp -d)"
 

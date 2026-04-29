@@ -1,4 +1,4 @@
-# boil_ocean
+# boil-ocean
 
 Boil Ocean is Soheil's complete-implementation standard as an installable agent skill.
 
@@ -13,7 +13,7 @@ edits, no commit, or no push.
 ## Install
 
 ```bash
-curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil_ocean
+curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil-ocean
 ```
 
 ## Skill name
@@ -28,4 +28,4 @@ $boil-ocean
 
 - `SKILL.md`: canonical skill instructions
 - `agents/openai.yaml`: OpenAI/Codex metadata
-- `claude-code/boil_ocean.md`: direct Claude Code-compatible copy
+- `claude-code/boil-ocean.md`: direct Claude Code-compatible copy

@@ -6,7 +6,7 @@ A collection of installable agent skills for Amp, Codex, Claude Code, Claude, an
 
 | Skill | Description |
 |-------|-------------|
-| [boil_ocean](boil_ocean/) | Execution-mode implementation standard: build the real fix, test, document receipts, and ship without hidden loose ends |
+| [boil-ocean](boil-ocean/) | Execution-mode implementation standard: build the real fix, test, document receipts, and ship without hidden loose ends |
 | [claude-check](claude-check/) | Independent checks-and-balances prompt for PR, receipt, git, test, CI, Linear, and shipping-truth review |
 | [soho](soho/) | Soho execution skill pack: planning, swarm orchestration, TDD, debugging, synthesis, and verification |
 | [jack-officehour](jack-officehour/) | Block 2.0 strategic review |
@@ -17,7 +17,7 @@ A collection of installable agent skills for Amp, Codex, Claude Code, Claude, an
 Install any single skill:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil_ocean
+curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil-ocean
 ```
 
 Install the full Soho skill pack:
