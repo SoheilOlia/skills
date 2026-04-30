@@ -8,6 +8,7 @@ A collection of installable agent skills for Amp, Codex, Claude Code, Claude, an
 |-------|-------------|
 | [boil-ocean](boil-ocean/) | Execution-mode implementation standard: build the real fix, test, document receipts, and ship without hidden loose ends |
 | [claude-check](claude-check/) | Independent checks-and-balances prompt for PR, receipt, git, test, CI, Linear, and shipping-truth review |
+| [close-session](close-session/) | Session and room closeout checks: git, stashes, receipts, knowledge files, remote SHAs, and room state |
 | [soho](soho/) | Soho execution skill pack: planning, swarm orchestration, TDD, debugging, synthesis, and verification |
 | [jack-officehour](jack-officehour/) | Block 2.0 strategic review |
 | [agent5](agent5/) | Cash App Trust & Safety copy generator — 48 guardrail rules, 37 template IDs |
@@ -18,6 +19,12 @@ Install any single skill:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s boil-ocean
+```
+
+Close a repo session or agent room cleanly:
+
+```bash
+curl -sL https://raw.githubusercontent.com/SoheilOlia/skills/main/install.sh | bash -s close-session
 ```
 
 Install the full Soho skill pack:
