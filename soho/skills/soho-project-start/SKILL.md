@@ -58,6 +58,24 @@ The package must answer:
 - Tests, validation commands, and success criteria.
 - Open questions with owner or next action.
 
+## 2A. Orchestration Roadmap Gate
+
+Before creating tickets or writing implementation code, turn the project into an orchestrated roadmap. The agent must be able to explain where the work is going, when the pieces converge, and what visible interface or workflow proves the project exists as a product.
+
+Meta-level prompt to apply:
+
+> We are not here to bang out disconnected tickets. Before implementation starts, define the end state, the visible product moment, and the orchestration path that turns separate tools into one usable workflow. Every milestone must have a tangible outcome a person can see, run, or decide from. Every ticket must map to a milestone, an interface/workflow checkpoint, and a truth layer: frontend/interface, backend/service, data/model, integration, docs/ops, or external decision. Maintain explicit Done, Todo, and Backlog states. If a task is only a fixture, prototype, generated artifact, or local proof, label it that way and do not let it masquerade as live readiness. If a backend or code dependency is required before the interface can come together, name it directly. Do not create a pile of tickets without a milestone map that shows how they converge into the actual experience.
+
+Required roadmap surfaces:
+
+- Milestone map with tangible outcomes.
+- Done, Todo, and Backlog sections.
+- Ticket-to-milestone mapping.
+- Code/backend/interface/integration/doc/external-decision classification for each ticket.
+- First visible product checkpoint.
+- Orchestration checkpoint where separate tools become one workflow.
+- Explicit non-claims for fixture-only or docs-only proof.
+
 ## 3. Update Markdown Surfaces In Lockstep
 
 Update only the files that are present, expected by the repo, or necessary for the new project.
