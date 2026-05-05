@@ -44,6 +44,7 @@ Confirm before high-blast-radius or externally visible actions: force-push, push
 
 - `brainstorming` for design and requirements shaping
 - `soho-project-start` for new projects, major specs, PRPs, architecture briefs, or durable markdown context updates
+- `pr-review` for GitHub pull requests, bot review comments, CI triage, merge readiness, or PR branch updates
 - `writing-plans` for multi-step implementation work
 - `test-driven-development` for behavior changes
 - `systematic-debugging` for bugs or failing tests

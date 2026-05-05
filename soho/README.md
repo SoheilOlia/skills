@@ -24,6 +24,7 @@ plugin's commands into that project with:
 
 - `using-soho`: choose solo, swarm, or recommendation mode before work starts
 - `soho-project-start`: start projects/specs with aligned markdown context, PRP/spec inputs, validation gates, and receipts
+- `pr-review`: inspect PR truth, bot review comments, CI, diff risk, merge readiness, and required fixes with GPT-5.5 Extra High where available
 - `brainstorming`: clarify creative implementation work before editing
 - `writing-plans`: create exact plans for multi-step work
 - `test-driven-development`: drive behavior changes through tests
