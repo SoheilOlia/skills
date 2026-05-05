@@ -23,6 +23,7 @@ plugin's commands into that project with:
 ## Included skills
 
 - `using-soho`: choose solo, swarm, or recommendation mode before work starts
+- `soho-project-start`: start projects/specs with aligned markdown context, PRP/spec inputs, validation gates, and receipts
 - `brainstorming`: clarify creative implementation work before editing
 - `writing-plans`: create exact plans for multi-step work
 - `test-driven-development`: drive behavior changes through tests

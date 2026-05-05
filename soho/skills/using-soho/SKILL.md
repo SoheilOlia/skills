@@ -43,6 +43,7 @@ Confirm before high-blast-radius or externally visible actions: force-push, push
 ## When to Load Other Soho Skills
 
 - `brainstorming` for design and requirements shaping
+- `soho-project-start` for new projects, major specs, PRPs, architecture briefs, or durable markdown context updates
 - `writing-plans` for multi-step implementation work
 - `test-driven-development` for behavior changes
 - `systematic-debugging` for bugs or failing tests
