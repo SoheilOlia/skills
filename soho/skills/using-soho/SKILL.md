@@ -43,14 +43,39 @@ Confirm before high-blast-radius or externally visible actions: force-push, push
 ## When to Load Other Soho Skills
 
 - `brainstorming` for design and requirements shaping
+- `soho-project-start` for new projects, major specs, PRPs, architecture briefs, or durable markdown context updates
+- `pr-review` for GitHub pull requests, bot review comments, CI triage, merge readiness, or PR branch updates
 - `writing-plans` for multi-step implementation work
 - `test-driven-development` for behavior changes
 - `systematic-debugging` for bugs or failing tests
 - `verification-before-completion` before saying a task is done
+- `truth-receipts` for receipts, claim ledgers, generated artifacts, status reports, proof boundaries, or external-system claims
+- `phase-boundary-hardening` before moving from spec/fixture/prototype/local proof into live integrations, publishing, CI, automation, or broad rollout
+- `external-drift-check` when repo docs or receipts reference Linear, GitHub, Slack, Figma, CI, published URLs, or other external systems
 - `orchestrating-swarms` when the task should decompose across roles
 - `selecting-topology` after choosing `swarm`
+- `parallel-merge-supervisor` when multiple agents, sessions, branches, worktrees, or tools are working on one repo
 - `subagent-driven-development` after a plan exists and bounded tasks are ready to execute
 - `synthesizing-results` after multiple role outputs exist
+- `integration-contracts` before wiring Slack, Figma, GitHub, Builderbot, Google Drive, Linear, Blockcell, CI, or other external APIs
+
+## Contextual Routing
+
+The user should not have to name every child skill. After loading `using-soho`, proactively inspect the request and repo context, then load the smallest useful set:
+
+| Context signal | Load |
+|---|---|
+| New project, PRP, architecture brief, durable markdown context, `AGENTS.md`, `TASK.md`, roadmap | `soho-project-start` |
+| Receipt, proof, claims ledger, generated artifact, status report, weekly update, "what is real" | `truth-receipts` |
+| Fixture/prototype/local proof about to become live, published, scheduled, or production-like | `phase-boundary-hardening` |
+| Linear/Slack/GitHub/Figma/CI/Blockcell/published URL claims or references | `external-drift-check` |
+| Multiple agents/sessions/tools, huddle, sidecars, lanes, swarm, hot files | `parallel-merge-supervisor` plus swarm skills if actually delegating |
+| Live connector/API/collector/sync/publish work | `integration-contracts` and often `phase-boundary-hardening` |
+| PR review, code review, audit, or "check this work" | `truth-receipts`, `external-drift-check` when external claims appear, and review-oriented local skills if available |
+| Behavior change, bug fix, or feature implementation | `test-driven-development` |
+| Failing test or unexplained behavior | `systematic-debugging` |
+
+If more than three child skills seem relevant, state the chosen subset and why. Prefer the critical-path risk first: truth claims, external drift, then implementation mechanics.
 
 ## Docs Location
 
